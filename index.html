@@ -1,0 +1,5420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Manual Completo de Arduino - Controle Inteligente de Caixa d'Água</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+
+<style>
+
+body{
+
+background:#f4f6f9;
+
+}
+
+.sidebar{
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:280px;
+
+height:100vh;
+
+overflow:auto;
+
+background:#212529;
+
+padding:20px;
+
+}
+
+.sidebar h3{
+
+color:white;
+
+}
+
+.sidebar a{
+
+display:block;
+
+padding:8px;
+
+color:#ddd;
+
+text-decoration:none;
+
+border-radius:5px;
+
+}
+
+.sidebar a:hover{
+
+background:#0d6efd;
+
+color:white;
+
+}
+
+.content{
+
+margin-left:300px;
+
+padding:40px;
+
+}
+
+pre{
+
+border-radius:10px;
+
+}
+
+.card{
+
+margin-bottom:30px;
+
+}
+
+footer{
+
+margin-top:80px;
+
+padding:30px;
+
+text-align:center;
+
+color:gray;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h3><i class="bi bi-book"></i> Manual Arduino</h3>
+
+<hr class="text-light">
+
+<a href="#capa">Capa</a>
+
+<a href="#indice">Índice</a>
+
+<a href="#intro">Introdução</a>
+
+<a href="#cap1">Capítulo 1</a>
+
+<a href="#cap2">Capítulo 2</a>
+
+<a href="#cap3">Capítulo 3</a>
+
+<a href="#cap4">Capítulo 4</a>
+
+<a href="#cap5">Capítulo 5</a>
+
+<a href="#glossario">Glossário</a>
+
+</div>
+
+<div class="content">
+
+<section id="capa">
+
+<div class="card shadow-lg">
+
+<div class="card-body text-center">
+
+<h1 class="display-3">
+
+📘
+
+</h1>
+
+<h1>
+
+Manual Completo de Arduino
+
+</h1>
+
+<h3>
+
+Controle Inteligente de Caixa d'Água
+
+</h3>
+
+<hr>
+
+<h4>
+
+Aprendendo Programação Linha por Linha
+
+</h4>
+
+<br>
+
+<p>
+
+Este livro foi desenvolvido para ensinar Arduino desde o absoluto zero,
+
+explicando cada linha do código,
+
+cada símbolo,
+
+cada operador
+
+e cada decisão tomada pelo programa.
+
+</p>
+
+<br>
+
+<p>
+
+Autor do projeto:
+
+José Jardim
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="indice">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+<h2>
+
+Índice
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<ol>
+
+<li>Introdução</li>
+
+<li>Conhecendo o Arduino</li>
+
+<li>Estrutura de um Programa</li>
+
+<li>Bibliotecas</li>
+
+<li>Variáveis</li>
+
+<li>Tipos de Dados</li>
+
+<li>Constantes</li>
+
+<li>Sensor Ultrassônico</li>
+
+<li>Relé</li>
+
+<li>Setup</li>
+
+<li>Loop</li>
+
+<li>Operadores</li>
+
+<li>Tomada de Decisão</li>
+
+<li>millis()</li>
+
+<li>Serial</li>
+
+<li>JSON</li>
+
+<li>Sistema de Segurança</li>
+
+<li>Código Completo Comentado</li>
+
+<li>Exercícios</li>
+
+<li>Glossário</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="intro">
+
+<div class="card shadow">
+
+<div class="card-header bg-success text-white">
+
+<h2>
+
+Introdução
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Bem-vindo ao Manual Completo de Arduino.
+
+</p>
+
+<p>
+
+Este não é apenas um livro sobre um projeto.
+
+É um curso completo.
+
+Nos próximos capítulos aprenderemos:
+
+</p>
+
+<ul>
+
+<li>Como o Arduino funciona.</li>
+
+<li>Como o compilador interpreta o código.</li>
+
+<li>Como o sensor ultrassônico mede distância.</li>
+
+<li>Como controlar um relé.</li>
+
+<li>Como utilizar variáveis.</li>
+
+<li>Como funciona um IF.</li>
+
+<li>Como funciona o LOOP.</li>
+
+<li>Como medir tempo utilizando millis().</li>
+
+<li>Como enviar dados em JSON.</li>
+
+<li>Como construir projetos profissionais.</li>
+
+</ul>
+
+<p>
+
+Todo o conteúdo será explicado passo a passo,
+
+sem assumir conhecimento prévio.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 1 -->
+<!-- ===================================================== -->
+
+<section id="cap1">
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+<h1>
+
+Capítulo 1
+
+</h1>
+
+<h2>
+
+O que é um Arduino?
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Antes de aprender programação precisamos entender o equipamento que
+executará o programa.
+
+</p>
+
+<p>
+
+O Arduino é uma plataforma de prototipagem eletrônica criada para
+facilitar o desenvolvimento de projetos de automação, robótica,
+Internet das Coisas (IoT) e sistemas embarcados.
+
+</p>
+
+<p>
+
+Quando escrevemos um programa em C++, o computador envia esse programa
+para a memória do microcontrolador presente na placa.
+
+A partir desse momento o Arduino executa o programa sozinho.
+
+</p>
+
+<hr>
+
+<h3>
+
+Imagine o seguinte exemplo
+
+</h3>
+
+<pre>
+
+Você escreve o programa
+
+        │
+
+        ▼
+
+Computador compila
+
+        │
+
+        ▼
+
+Programa é enviado
+
+        │
+
+        ▼
+
+Arduino grava na memória
+
+        │
+
+        ▼
+
+Arduino executa continuamente
+
+</pre>
+
+<hr>
+
+<h3>
+
+O Arduino é um computador?
+
+</h3>
+
+<p>
+
+Sim.
+
+Ele é um computador extremamente pequeno.
+
+Enquanto um notebook possui bilhões de transistores e vários gigabytes
+de memória, um Arduino possui um microcontrolador muito mais simples,
+mas perfeitamente capaz de controlar sensores, motores, relés, LEDs e
+diversos dispositivos eletrônicos.
+
+</p>
+
+<hr>
+
+<h3>
+
+Principais componentes de uma placa Arduino Uno
+
+</h3>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Componente</th>
+
+<th>Função</th>
+
+</tr>
+
+<tr>
+
+<td>Microcontrolador</td>
+
+<td>Executa o programa.</td>
+
+</tr>
+
+<tr>
+
+<td>Porta USB</td>
+
+<td>Recebe o programa enviado pelo computador.</td>
+
+</tr>
+
+<tr>
+
+<td>Pinos Digitais</td>
+
+<td>Enviam e recebem sinais digitais.</td>
+
+</tr>
+
+<tr>
+
+<td>Pinos Analógicos</td>
+
+<td>Leem tensões analógicas.</td>
+
+</tr>
+
+<tr>
+
+<td>Regulador de tensão</td>
+
+<td>Alimenta a placa corretamente.</td>
+
+</tr>
+
+<tr>
+
+<td>Cristal Oscilador</td>
+
+<td>Controla a velocidade de funcionamento.</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>
+
+Como nosso projeto funciona?
+
+</h3>
+
+<pre>
+
+          Sensor Ultrassônico
+
+                 │
+
+                 ▼
+
+        Mede a distância
+
+                 │
+
+                 ▼
+
+             Arduino
+
+                 │
+
+     Decide ligar ou não
+
+                 │
+
+                 ▼
+
+               Relé
+
+                 │
+
+                 ▼
+
+               Bomba
+
+                 │
+
+                 ▼
+
+            Caixa d'água
+
+</pre>
+
+<p>
+
+O Arduino será o cérebro do projeto.
+
+O sensor apenas informa a distância da água.
+
+O relé apenas liga ou desliga a bomba.
+
+Quem toma todas as decisões é o programa escrito por nós.
+
+</p>
+
+<div class="alert alert-info">
+
+<b>Curiosidade</b><br><br>
+
+A palavra <b>Arduino</b> surgiu na Itália.
+
+Hoje existem milhões de placas Arduino espalhadas pelo mundo sendo
+utilizadas por estudantes, engenheiros, pesquisadores e empresas.
+
+</div>
+
+<div class="alert alert-warning">
+
+<b>Importante</b><br><br>
+
+O Arduino não "adivinha" o que deve fazer.
+
+Ele apenas executa exatamente as instruções escritas pelo programador.
+
+Se houver um erro no código, o Arduino repetirá esse erro milhares de
+vezes por segundo.
+
+</div>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>Arduino é um computador dedicado ao controle eletrônico.</li>
+
+<li>Ele executa programas escritos em C++.</li>
+
+<li>Nosso projeto utilizará um sensor ultrassônico para medir o nível da água.</li>
+
+<li>O Arduino decidirá quando ligar ou desligar a bomba.</li>
+
+<li>O relé será apenas um interruptor controlado eletronicamente.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>O Arduino executa um programa apenas uma vez ou continuamente?</li>
+
+<li>Quem mede a distância da água?</li>
+
+<li>Quem toma a decisão de ligar a bomba?</li>
+
+<li>Qual é a função do relé?</li>
+
+<li>Explique com suas palavras o que é um microcontrolador.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 2 -->
+<!-- ===================================================== -->
+
+<section id="cap2">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+<h1>
+
+Capítulo 2
+
+</h1>
+
+<h2>
+
+Como um Programa Arduino Funciona
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Agora que já sabemos o que é um Arduino,
+vamos entender como ele executa um programa.
+
+</p>
+
+<p>
+
+Toda programação para Arduino segue praticamente a mesma estrutura.
+
+Independentemente do projeto ser simples ou extremamente complexo,
+todo programa possuirá duas funções principais.
+
+</p>
+
+<hr>
+
+<h3>
+
+Estrutura básica
+
+</h3>
+
+<pre><code class="language-cpp">
+
+void setup(){
+
+}
+
+void loop(){
+
+}
+
+</code></pre>
+
+<p>
+
+Pode parecer pouco,
+mas praticamente todos os programas Arduino começam dessa forma.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que acontece quando ligamos o Arduino?
+
+</h3>
+
+<pre>
+
+Energia
+
+↓
+
+Arduino liga
+
+↓
+
+Carrega o programa
+
+↓
+
+Executa setup()
+
+↓
+
+Executa loop()
+
+↓
+
+Executa loop()
+
+↓
+
+Executa loop()
+
+↓
+
+Executa loop()
+
+↓
+
+Repete para sempre
+
+</pre>
+
+<p>
+
+O setup() acontece apenas uma única vez.
+
+Depois disso o Arduino entra em um ciclo infinito executando a função
+loop().
+
+</p>
+
+<hr>
+
+<h3>
+
+Entendendo o setup()
+
+</h3>
+
+<pre><code class="language-cpp">
+
+void setup(){
+
+}
+
+</code></pre>
+
+<p>
+
+A palavra <b>setup</b> significa preparação ou configuração.
+
+É dentro dessa função que normalmente configuramos:
+
+</p>
+
+<ul>
+
+<li>Pinos de entrada.</li>
+
+<li>Pinos de saída.</li>
+
+<li>Comunicação Serial.</li>
+
+<li>Estado inicial do projeto.</li>
+
+</ul>
+
+<p>
+
+Tudo isso acontece apenas uma vez.
+
+</p>
+
+<hr>
+
+<h3>
+
+Analogia com o cotidiano
+
+</h3>
+
+<p>
+
+Imagine um teatro.
+
+</p>
+
+<pre>
+
+Abrir portas
+
+↓
+
+Ligar iluminação
+
+↓
+
+Preparar palco
+
+↓
+
+Receber público
+
+</pre>
+
+<p>
+
+Essas tarefas acontecem apenas antes do espetáculo começar.
+
+Depois não faz sentido prepará-las novamente.
+
+O setup() funciona exatamente assim.
+
+</p>
+
+<hr>
+
+<h3>
+
+Entendendo o loop()
+
+</h3>
+
+<pre><code class="language-cpp">
+
+void loop(){
+
+}
+
+</code></pre>
+
+<p>
+
+Depois que o setup() termina,
+o Arduino entra no loop().
+
+Essa função nunca termina enquanto houver energia na placa.
+
+</p>
+
+<pre>
+
+loop()
+
+↓
+
+fim
+
+↓
+
+loop()
+
+↓
+
+fim
+
+↓
+
+loop()
+
+↓
+
+fim
+
+↓
+
+loop()
+
+↓
+
+...
+
+</pre>
+
+<p>
+
+É dentro do loop() que normalmente fazemos:
+
+</p>
+
+<ul>
+
+<li>Ler sensores.</li>
+
+<li>Tomar decisões.</li>
+
+<li>Ligar dispositivos.</li>
+
+<li>Desligar dispositivos.</li>
+
+<li>Enviar informações pela Serial.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Como isso acontece no nosso projeto?
+
+</h3>
+
+<pre>
+
+loop()
+
+↓
+
+Ler distância
+
+↓
+
+A água está baixa?
+
+↓
+
+Sim
+
+↓
+
+Liga bomba
+
+↓
+
+Esperar
+
+↓
+
+Ler novamente
+
+↓
+
+A caixa encheu?
+
+↓
+
+Sim
+
+↓
+
+Desliga bomba
+
+↓
+
+Repetir
+
+</pre>
+
+<p>
+
+Perceba que o Arduino nunca "para para pensar".
+
+Ele simplesmente repete esse processo milhares de vezes durante sua vida útil.
+
+</p>
+
+<hr>
+
+<h3>
+
+O significado da palavra void
+
+</h3>
+
+<pre><code class="language-cpp">
+
+void
+
+</code></pre>
+
+<p>
+
+A palavra <b>void</b> significa literalmente:
+
+</p>
+
+<pre>
+
+Sem retorno
+
+</pre>
+
+<p>
+
+Isso quer dizer que a função executa ações,
+mas não devolve nenhum valor.
+
+</p>
+
+<p>
+
+Por exemplo,
+uma função de soma poderia devolver um número.
+
+Já setup() e loop() apenas executam comandos.
+
+Por isso utilizam o tipo void.
+
+</p>
+
+<hr>
+
+<h3>
+
+As chaves
+
+</h3>
+
+<pre><code class="language-cpp">
+
+{
+
+}
+
+</code></pre>
+
+<p>
+
+As chaves delimitam o início e o fim de um bloco.
+
+Tudo que estiver entre elas pertence àquela função.
+
+</p>
+
+<p>
+
+Exemplo:
+
+</p>
+
+<pre><code class="language-cpp">
+
+void setup(){
+
+    Serial.begin(9600);
+
+    pinMode(8,OUTPUT);
+
+}
+
+</code></pre>
+
+<p>
+
+Neste exemplo,
+as duas instruções pertencem ao setup().
+
+</p>
+
+<hr>
+
+<div class="alert alert-success">
+
+<b>Dica</b>
+
+<br><br>
+
+Sempre procure identar o código corretamente.
+
+Uma boa identação facilita muito a leitura
+e reduz a chance de cometer erros.
+
+</div>
+
+<div class="alert alert-warning">
+
+<b>Atenção</b>
+
+<br><br>
+
+Se você esquecer uma chave de fechamento (<b>}</b>),
+o compilador normalmente exibirá uma mensagem de erro.
+
+Grande parte dos erros de iniciantes está relacionada
+a chaves abertas ou fechadas incorretamente.
+
+</div>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>Todo programa Arduino possui setup() e loop().</li>
+
+<li>setup() executa apenas uma vez.</li>
+
+<li>loop() executa continuamente.</li>
+
+<li>void significa que a função não retorna valores.</li>
+
+<li>As chaves delimitam blocos de código.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>Qual função é executada apenas uma vez?</li>
+
+<li>Qual função permanece repetindo enquanto houver energia?</li>
+
+<li>O que significa a palavra <b>void</b>?</li>
+
+<li>Para que servem as chaves?</li>
+
+<li>Por que o loop() é essencial em projetos de automação?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 3 -->
+<!-- ===================================================== -->
+
+<section id="cap3">
+
+<div class="card shadow">
+
+<div class="card-header bg-success text-white">
+
+<h1>
+
+Capítulo 3
+
+</h1>
+
+<h2>
+
+A Primeira Linha do Programa
+
+</h2>
+
+<h3>
+
+#include &lt;Ultrasonic.h&gt;
+
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Finalmente começaremos a estudar o programa utilizado no controle
+automático da caixa d'água.
+
+A primeira linha do programa é:
+
+</p>
+
+<pre><code class="language-cpp">
+#include &lt;Ultrasonic.h&gt;
+</code></pre>
+
+<hr>
+
+<h3>
+
+O que significa #include?
+
+</h3>
+
+<p>
+
+A palavra <b>include</b> vem do inglês e significa
+<b>incluir</b>.
+
+</p>
+
+<p>
+
+O caractere <b>#</b> indica que esta instrução será interpretada pelo
+pré-processador antes da compilação do programa.
+
+</p>
+
+<p>
+
+Ou seja, antes mesmo do compilador transformar nosso código em linguagem
+de máquina, existe uma etapa anterior chamada
+<b>pré-processamento</b>.
+
+</p>
+
+<hr>
+
+<h3>
+
+Como funciona o processo de compilação?
+
+</h3>
+
+<pre>
+
+Você escreve o código
+
+        │
+
+        ▼
+
+Pré-processador
+
+        │
+
+        ▼
+
+Compilador
+
+        │
+
+        ▼
+
+Código de Máquina
+
+        │
+
+        ▼
+
+Arduino
+
+</pre>
+
+<p>
+
+O pré-processador procura todas as instruções iniciadas por
+<b>#</b>.
+
+Entre elas:
+
+</p>
+
+<ul>
+
+<li>#include</li>
+
+<li>#define</li>
+
+<li>#ifdef</li>
+
+<li>#ifndef</li>
+
+<li>#endif</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+O que é uma biblioteca?
+
+</h3>
+
+<p>
+
+Uma biblioteca é um conjunto de códigos escritos anteriormente por outro
+programador.
+
+Em vez de escrever tudo do zero, podemos reutilizar esse código.
+
+</p>
+
+<p>
+
+É exatamente o mesmo conceito de uma biblioteca de livros.
+
+Você não precisa escrever um livro inteiro toda vez que quiser aprender
+Matemática.
+
+Basta pegar um livro já existente.
+
+</p>
+
+<p>
+
+Na programação acontece exatamente a mesma coisa.
+
+</p>
+
+<hr>
+
+<h3>
+
+Analogia
+
+</h3>
+
+<pre>
+
+Biblioteca Física
+
+↓
+
+Livros
+
+↓
+
+Conhecimento pronto
+
+
+
+Biblioteca Arduino
+
+↓
+
+Arquivos .h
+
+↓
+
+Funções prontas
+
+</pre>
+
+<hr>
+
+<h3>
+
+Por que usamos a biblioteca Ultrasonic?
+
+</h3>
+
+<p>
+
+Nosso projeto utiliza um sensor ultrassônico.
+
+Esse sensor precisa:
+
+</p>
+
+<ul>
+
+<li>Enviar pulsos ultrassônicos.</li>
+
+<li>Esperar o eco voltar.</li>
+
+<li>Medir o tempo.</li>
+
+<li>Calcular a distância.</li>
+
+</ul>
+
+<p>
+
+Tudo isso já está implementado dentro da biblioteca.
+
+</p>
+
+<p>
+
+Graças a ela podemos simplesmente escrever:
+
+</p>
+
+<pre><code class="language-cpp">
+sensor.read(CM);
+</code></pre>
+
+<p>
+
+e obter imediatamente a distância em centímetros.
+
+</p>
+
+<hr>
+
+<h3>
+
+Como seria sem a biblioteca?
+
+</h3>
+
+<p>
+
+Sem essa biblioteca precisaríamos controlar diretamente os pinos TRIG e
+ECHO.
+
+O programa ficaria muito maior.
+
+</p>
+
+<pre>
+
+Ativar TRIG
+
+↓
+
+Esperar alguns microssegundos
+
+↓
+
+Desativar TRIG
+
+↓
+
+Esperar retorno do ECHO
+
+↓
+
+Medir tempo
+
+↓
+
+Calcular distância
+
+↓
+
+Converter centímetros
+
+</pre>
+
+<p>
+
+Tudo isso seria escrito manualmente.
+
+</p>
+
+<hr>
+
+<h3>
+
+O significado dos sinais &lt; &gt;
+
+</h3>
+
+<pre><code class="language-cpp">
+#include &lt;Ultrasonic.h&gt;
+</code></pre>
+
+<p>
+
+Os símbolos
+
+<b>&lt;</b>
+
+e
+
+<b>&gt;</b>
+
+informam ao compilador que essa biblioteca deve ser procurada nas pastas
+padrão do Arduino.
+
+</p>
+
+<p>
+
+Existe outra forma:
+
+</p>
+
+<pre><code class="language-cpp">
+#include "MinhaBiblioteca.h"
+</code></pre>
+
+<p>
+
+Quando usamos aspas, normalmente estamos incluindo uma biblioteca do
+próprio projeto.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que significa a extensão .h?
+
+</h3>
+
+<p>
+
+A letra <b>h</b> significa
+<b>Header</b>.
+
+</p>
+
+<p>
+
+Arquivos Header geralmente contêm:
+
+</p>
+
+<ul>
+
+<li>Declarações de funções.</li>
+
+<li>Declarações de classes.</li>
+
+<li>Constantes.</li>
+
+<li>Tipos de dados.</li>
+
+<li>Protótipos.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Curiosidade
+
+</h3>
+
+<div class="alert alert-info">
+
+A maioria das bibliotecas possui dois arquivos principais.
+
+<br><br>
+
+<b>Ultrasonic.h</b>
+
+→ declarações.
+
+<br><br>
+
+<b>Ultrasonic.cpp</b>
+
+→ implementação das funções.
+
+</div>
+
+<hr>
+
+<h3>
+
+Fluxograma da inclusão da biblioteca
+
+</h3>
+
+<pre>
+
+Programa
+
+↓
+
+#include
+
+↓
+
+Pré-processador
+
+↓
+
+Procura Ultrasonic.h
+
+↓
+
+Encontrou?
+
+↓
+
+Sim
+
+↓
+
+Inclui o conteúdo
+
+↓
+
+Compilador continua
+
+</pre>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>#include significa incluir um arquivo.</li>
+
+<li>O símbolo # indica uma diretiva do pré-processador.</li>
+
+<li>Bibliotecas evitam reescrever códigos já existentes.</li>
+
+<li>Ultrasonic.h contém recursos para controlar o sensor ultrassônico.</li>
+
+<li>Sem essa biblioteca nosso programa seria muito maior.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>O que significa a palavra include?</li>
+
+<li>O que faz o pré-processador?</li>
+
+<li>Qual a função da biblioteca Ultrasonic?</li>
+
+<li>Qual a diferença entre usar &lt; &gt; e " " no #include?</li>
+
+<li>O que significa a extensão .h?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 4 -->
+<!-- ===================================================== -->
+
+<section id="cap4">
+
+<div class="card shadow">
+
+<div class="card-header bg-warning">
+
+<h1>
+
+Capítulo 4
+
+</h1>
+
+<h2>
+
+Entendendo o #define
+
+</h2>
+
+<h3>
+
+Definindo os Pinos do Projeto
+
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Depois de incluir a biblioteca do sensor ultrassônico,
+o próximo trecho do programa é:
+
+</p>
+
+<pre><code class="language-cpp">
+#define TRIG_PIN 7
+#define ECHO_PIN 6
+#define RELAY_PIN 8
+</code></pre>
+
+<p>
+
+À primeira vista parecem apenas três linhas simples.
+
+Na prática,
+elas tornam o programa muito mais organizado e fácil de manter.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que significa #define?
+
+</h3>
+
+<p>
+
+Assim como o <b>#include</b>,
+o <b>#define</b> também é uma diretiva do pré-processador.
+
+</p>
+
+<p>
+
+Ele não cria uma variável.
+
+Também não reserva memória.
+
+O que ele faz é simplesmente substituir um texto por outro
+antes da compilação.
+
+</p>
+
+<hr>
+
+<h3>
+
+Como o pré-processador trabalha?
+
+</h3>
+
+<p>
+
+Imagine que o compilador encontrou esta linha:
+
+</p>
+
+<pre><code class="language-cpp">
+#define TRIG_PIN 7
+</code></pre>
+
+<p>
+
+A partir desse momento,
+sempre que ele encontrar a palavra <b>TRIG_PIN</b>,
+ele trocará automaticamente pelo número <b>7</b>.
+
+</p>
+
+<hr>
+
+<h3>
+
+Exemplo prático
+
+</h3>
+
+<p>
+
+Você escreve:
+
+</p>
+
+<pre><code class="language-cpp">
+digitalWrite(TRIG_PIN, HIGH);
+</code></pre>
+
+<p>
+
+O compilador enxergará:
+
+</p>
+
+<pre><code class="language-cpp">
+digitalWrite(7, HIGH);
+</code></pre>
+
+<p>
+
+Essa substituição acontece automaticamente.
+
+</p>
+
+<hr>
+
+<h3>
+
+Outro exemplo
+
+</h3>
+
+<pre><code class="language-cpp">
+#define LED 13
+</code></pre>
+
+<p>
+
+Depois podemos escrever:
+
+</p>
+
+<pre><code class="language-cpp">
+pinMode(LED, OUTPUT);
+
+digitalWrite(LED, HIGH);
+</code></pre>
+
+<p>
+
+Internamente o compilador transforma em:
+
+</p>
+
+<pre><code class="language-cpp">
+pinMode(13, OUTPUT);
+
+digitalWrite(13, HIGH);
+</code></pre>
+
+<hr>
+
+<h3>
+
+Por que não escrever apenas o número?
+
+</h3>
+
+<p>
+
+Imagine um programa com centenas de linhas.
+
+Em vários lugares aparece:
+
+</p>
+
+<pre><code class="language-cpp">
+7
+</code></pre>
+
+<p>
+
+Depois você decide ligar o sensor no pino 9.
+
+Agora seria necessário procurar todos os números 7
+espalhados pelo código.
+
+Isso aumenta muito a chance de esquecer algum.
+
+</p>
+
+<p>
+
+Com o uso do <b>#define</b>,
+basta alterar apenas uma linha:
+
+</p>
+
+<pre><code class="language-cpp">
+#define TRIG_PIN 9
+</code></pre>
+
+<p>
+
+Todo o restante do programa continua funcionando.
+
+</p>
+
+<hr>
+
+<h3>
+
+Nomes descritivos
+
+</h3>
+
+<p>
+
+Observe os nomes escolhidos.
+
+</p>
+
+<table class="table table-striped">
+
+<tr>
+
+<th>Nome</th>
+
+<th>Significado</th>
+
+</tr>
+
+<tr>
+
+<td>TRIG_PIN</td>
+
+<td>Pino responsável pelo disparo do ultrassom.</td>
+
+</tr>
+
+<tr>
+
+<td>ECHO_PIN</td>
+
+<td>Pino responsável por receber o eco.</td>
+
+</tr>
+
+<tr>
+
+<td>RELAY_PIN</td>
+
+<td>Pino que controla o relé.</td>
+
+</tr>
+
+</table>
+
+<p>
+
+Esses nomes tornam o programa praticamente autoexplicativo.
+
+</p>
+
+<hr>
+
+<h3>
+
+Por que usar letras maiúsculas?
+
+</h3>
+
+<p>
+
+Existe uma convenção muito utilizada na programação.
+
+</p>
+
+<ul>
+
+<li>Macros (#define) → LETRAS MAIÚSCULAS.</li>
+
+<li>Constantes → normalmente MAIÚSCULAS ou camelCase.</li>
+
+<li>Variáveis → letras minúsculas.</li>
+
+<li>Funções → camelCase.</li>
+
+<li>Classes → PascalCase.</li>
+
+</ul>
+
+<p>
+
+Essa convenção facilita a leitura do código.
+
+Ao bater o olho em TRIG_PIN,
+já sabemos que não é uma variável comum.
+
+</p>
+
+<hr>
+
+<h3>
+
+Ligação física do sensor
+
+</h3>
+
+<pre>
+
+             HC-SR04
+
+      +----------------+
+
+VCC --- Alimentação 5V
+
+TRIG -- Arduino Pino 7
+
+ECHO -- Arduino Pino 6
+
+GND --- Terra
+
+      +----------------+
+
+</pre>
+
+<hr>
+
+<h3>
+
+Ligação do relé
+
+</h3>
+
+<pre>
+
+Arduino
+
+Pino 8
+
+↓
+
+Entrada IN do Relé
+
+↓
+
+Relé
+
+↓
+
+Bomba
+
+</pre>
+
+<hr>
+
+<h3>
+
+Macro x Variável
+
+</h3>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Macro (#define)</th>
+
+<th>Variável</th>
+
+</tr>
+
+<tr>
+
+<td>Não ocupa memória.</td>
+
+<td>Ocupa memória.</td>
+
+</tr>
+
+<tr>
+
+<td>Substituição de texto.</td>
+
+<td>Armazena valores.</td>
+
+</tr>
+
+<tr>
+
+<td>Executada antes da compilação.</td>
+
+<td>Existe durante a execução.</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<div class="alert alert-info">
+
+<b>Curiosidade</b>
+
+<br><br>
+
+Em projetos modernos de C++ é comum substituir algumas macros
+por constantes usando <b>const</b> ou <b>constexpr</b>,
+pois oferecem maior segurança de tipos.
+
+Mesmo assim,
+o uso de <b>#define</b> para definir pinos ainda é muito comum
+em projetos Arduino.
+
+</div>
+
+<hr>
+
+<div class="alert alert-warning">
+
+<b>Boa prática</b>
+
+<br><br>
+
+Escolha nomes que expliquem claramente a função do componente.
+
+TRIG_PIN é muito mais fácil de entender do que simplesmente P7.
+
+</div>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>#define cria uma macro.</li>
+
+<li>Macros são substituições de texto realizadas antes da compilação.</li>
+
+<li>Não ocupam memória durante a execução.</li>
+
+<li>Tornam o código mais organizado.</li>
+
+<li>Facilitam alterações futuras.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>O #define cria uma variável?</li>
+
+<li>Quando ocorre a substituição feita pelo pré-processador?</li>
+
+<li>Por que usamos TRIG_PIN em vez de escrever apenas 7?</li>
+
+<li>Qual é a vantagem de usar nomes descritivos?</li>
+
+<li>Explique a diferença entre uma macro e uma variável.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 5 -->
+<!-- ===================================================== -->
+
+<section id="cap5">
+
+<div class="card shadow">
+
+<div class="card-header bg-info text-dark">
+
+<h1>
+
+Capítulo 5
+
+</h1>
+
+<h2>
+
+Criando o Objeto do Sensor Ultrassônico
+
+</h2>
+
+<h3>
+
+Ultrasonic sensor(TRIG_PIN, ECHO_PIN);
+
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Depois de definir os pinos do Arduino,
+chegamos a uma das linhas mais importantes do programa.
+
+</p>
+
+<pre><code class="language-cpp">
+
+Ultrasonic sensor(TRIG_PIN, ECHO_PIN);
+
+</code></pre>
+
+<p>
+
+Essa linha parece pequena,
+mas nela aparecem diversos conceitos importantes da linguagem C++.
+
+</p>
+
+<hr>
+
+<h3>
+
+Primeira palavra
+
+</h3>
+
+<pre><code class="language-cpp">
+
+Ultrasonic
+
+</code></pre>
+
+<p>
+
+Essa palavra não foi criada por nós.
+
+Ela foi criada pelo autor da biblioteca Ultrasonic.
+
+</p>
+
+<p>
+
+Ultrasonic é o nome de uma <b>classe</b>.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que é uma classe?
+
+</h3>
+
+<p>
+
+Uma classe funciona como um molde.
+
+Ela descreve como determinado objeto deverá funcionar.
+
+</p>
+
+<p>
+
+Podemos compará-la à planta de uma casa.
+
+</p>
+
+<pre>
+
+Planta da casa
+
+↓
+
+Define quartos
+
+↓
+
+Define portas
+
+↓
+
+Define janelas
+
+↓
+
+Mas ainda não existe nenhuma casa construída.
+
+</pre>
+
+<p>
+
+A classe funciona exatamente assim.
+
+Ela descreve como o objeto será,
+mas ainda não cria nada.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que é um objeto?
+
+</h3>
+
+<p>
+
+Quando usamos a classe para criar algo real,
+esse novo elemento recebe o nome de <b>objeto</b>.
+
+</p>
+
+<pre>
+
+Classe
+
+↓
+
+Molde
+
+↓
+
+Objeto
+
+↓
+
+Elemento criado
+
+</pre>
+
+<p>
+
+Em nosso programa,
+o objeto recebe o nome:
+
+</p>
+
+<pre><code class="language-cpp">
+
+sensor
+
+</code></pre>
+
+<p>
+
+Portanto:
+
+</p>
+
+<ul>
+
+<li>Ultrasonic → Classe.</li>
+
+<li>sensor → Objeto.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Analogia com um carro
+
+</h3>
+
+<pre>
+
+Classe Carro
+
+↓
+
+Define:
+
+- rodas
+
+- portas
+
+- volante
+
+- motor
+
+↓
+
+Objeto
+
+↓
+
+Meu carro
+
+</pre>
+
+<p>
+
+A classe descreve como qualquer carro deve ser.
+
+O objeto representa um carro específico.
+
+</p>
+
+<hr>
+
+<h3>
+
+Por que o objeto recebeu o nome sensor?
+
+</h3>
+
+<p>
+
+Poderíamos escolher praticamente qualquer nome.
+
+</p>
+
+Exemplos válidos:
+
+<pre><code class="language-cpp">
+
+Ultrasonic sensor(TRIG_PIN,ECHO_PIN);
+
+Ultrasonic distancia(TRIG_PIN,ECHO_PIN);
+
+Ultrasonic medidor(TRIG_PIN,ECHO_PIN);
+
+Ultrasonic meuSensor(TRIG_PIN,ECHO_PIN);
+
+</code></pre>
+
+<p>
+
+O nome <b>sensor</b> foi escolhido apenas porque facilita a leitura do programa.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que significam os parênteses?
+
+</h3>
+
+<pre><code class="language-cpp">
+
+(TRIG_PIN,ECHO_PIN)
+
+</code></pre>
+
+<p>
+
+Esses valores são enviados para o construtor da classe.
+
+</p>
+
+<p>
+
+Nesse momento estamos dizendo para a biblioteca:
+
+</p>
+
+<ul>
+
+<li>Qual pino envia o pulso ultrassônico.</li>
+
+<li>Qual pino recebe o eco.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+O que é um construtor?
+
+</h3>
+
+<p>
+
+O construtor é uma função especial executada automaticamente quando um objeto é criado.
+
+</p>
+
+<p>
+
+Ele prepara o objeto para funcionar corretamente.
+
+</p>
+
+<pre>
+
+Criar objeto
+
+↓
+
+Executar construtor
+
+↓
+
+Guardar configurações
+
+↓
+
+Objeto pronto
+
+</pre>
+
+<hr>
+
+<h3>
+
+Substituindo os #define
+
+</h3>
+
+<p>
+
+No capítulo anterior vimos que:
+
+</p>
+
+<pre><code class="language-cpp">
+
+#define TRIG_PIN 7
+
+#define ECHO_PIN 6
+
+</code></pre>
+
+<p>
+
+Antes da compilação,
+o pré-processador transforma a linha em:
+
+</p>
+
+<pre><code class="language-cpp">
+
+Ultrasonic sensor(7,6);
+
+</code></pre>
+
+<p>
+
+Ou seja,
+o construtor recebe os números reais dos pinos.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que acontece internamente?
+
+</h3>
+
+<pre>
+
+Criar objeto sensor
+
+↓
+
+Guardar TRIG = 7
+
+↓
+
+Guardar ECHO = 6
+
+↓
+
+Objeto pronto para medir
+
+</pre>
+
+<p>
+
+Depois disso,
+sempre que chamarmos uma função do objeto,
+ele já saberá quais pinos utilizar.
+
+</p>
+
+<hr>
+
+<h3>
+
+Como utilizamos esse objeto?
+
+</h3>
+
+<p>
+
+Mais adiante no programa veremos:
+
+</p>
+
+<pre><code class="language-cpp">
+
+sensor.read(CM);
+
+</code></pre>
+
+<p>
+
+Observe a palavra <b>sensor</b>.
+
+É exatamente o objeto criado nesta linha.
+
+</p>
+
+<p>
+
+Quando escrevemos:
+
+</p>
+
+<pre><code class="language-cpp">
+
+sensor.read(CM);
+
+</code></pre>
+
+<p>
+
+Estamos dizendo:
+
+</p>
+
+<blockquote>
+
+"Objeto sensor,
+utilize sua função read()
+para medir a distância em centímetros."
+
+</blockquote>
+
+<hr>
+
+<h3>
+
+O operador ponto
+
+</h3>
+
+<pre><code class="language-cpp">
+
+sensor.read()
+
+</code></pre>
+
+<p>
+
+O ponto (<b>.</b>) significa:
+
+</p>
+
+<blockquote>
+
+"Acesse uma função pertencente ao objeto."
+
+</blockquote>
+
+<p>
+
+Ele também pode acessar variáveis internas.
+
+</p>
+
+<hr>
+
+<h3>
+
+Exemplo simples
+
+</h3>
+
+<pre><code class="language-cpp">
+
+Pessoa joao;
+
+joao.andar();
+
+joao.falar();
+
+joao.sentar();
+
+</code></pre>
+
+<p>
+
+Pessoa é a classe.
+
+João é o objeto.
+
+Andar(),
+falar()
+e sentar()
+são funções pertencentes ao objeto.
+
+</p>
+
+<hr>
+
+<div class="alert alert-info">
+
+<b>Curiosidade</b>
+
+<br><br>
+
+A Programação Orientada a Objetos (POO)
+é utilizada em praticamente todos os grandes softwares modernos,
+incluindo navegadores,
+jogos,
+aplicativos bancários
+e sistemas operacionais.
+
+</div>
+
+<div class="alert alert-success">
+
+<b>Dica</b>
+
+<br><br>
+
+Sempre escolha nomes de objetos que representem claramente
+o que eles fazem.
+
+Um nome bem escolhido reduz bastante a dificuldade de entender o código.
+
+</div>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>Ultrasonic é uma classe.</li>
+
+<li>sensor é um objeto.</li>
+
+<li>Objetos são criados a partir de classes.</li>
+
+<li>Os parênteses chamam o construtor.</li>
+
+<li>TRIG_PIN e ECHO_PIN informam quais pinos serão utilizados.</li>
+
+<li>O operador ponto acessa funções do objeto.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>O que é uma classe?</li>
+
+<li>O que é um objeto?</li>
+
+<li>Qual é a função do construtor?</li>
+
+<li>O que faz o operador ponto?</li>
+
+<li>Por que escolhemos o nome sensor para o objeto?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 6 -->
+<!-- ===================================================== -->
+
+<section id="cap6">
+
+<div class="card shadow">
+
+<div class="card-header bg-danger text-white">
+
+<h1>
+
+Capítulo 6
+
+</h1>
+
+<h2>
+
+Variáveis, Memória e Constantes
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Agora vamos entrar em uma das partes mais importantes do programa:
+as variáveis.
+
+</p>
+
+<p>
+
+Elas são responsáveis por guardar informações durante a execução do Arduino.
+
+</p>
+
+<hr>
+
+<h3>
+
+O bloco de variáveis do projeto
+
+</h3>
+
+<pre><code class="language-cpp">
+
+bool bombaLigada = false;
+bool falhaSeguranca = false;
+
+const int LIMIAR_LIGAR = 30;
+const int LIMIAR_DESLIGAR = 15;
+const unsigned long TEMPO_MAX_LIGADA = 10UL * 60UL * 1000UL;
+
+unsigned long inicioBomba = 0;
+
+</code></pre>
+
+<hr>
+
+<h3>
+
+O que é uma variável?
+
+</h3>
+
+<p>
+
+Uma variável é como uma <b>caixa na memória</b> do Arduino.
+
+Dentro dessa caixa guardamos valores que podem mudar durante o programa.
+
+</p>
+
+<pre>
+
+Memória do Arduino
+
+┌──────────────┐
+│ bombaLigada  │ → true/false
+└──────────────┘
+
+┌──────────────┐
+│ inicioBomba  │ → tempo em ms
+└──────────────┘
+
+</pre>
+
+<hr>
+
+<h3>
+
+Tipo bool
+
+</h3>
+
+<pre><code class="language-cpp">
+
+bool bombaLigada = false;
+
+</code></pre>
+
+<p>
+
+O tipo <b>bool</b> só pode assumir dois valores:
+
+</p>
+
+<ul>
+
+<li>true (verdadeiro)</li>
+<li>false (falso)</li>
+
+</ul>
+
+<p>
+
+Ele é ideal para representar estados ligados/desligados.
+
+</p>
+
+<hr>
+
+<h3>
+
+Exemplo prático
+
+</h3>
+
+<pre>
+
+bombaLigada = true  → bomba ligada
+
+bombaLigada = false → bomba desligada
+
+</pre>
+
+<hr>
+
+<h3>
+
+falhaSeguranca
+
+</h3>
+
+<pre><code class="language-cpp">
+
+bool falhaSeguranca = false;
+
+</code></pre>
+
+<p>
+
+Essa variável indica se o sistema entrou em modo de proteção.
+
+</p>
+
+<p>
+
+Quando ela vira true,
+o sistema bloqueia o funcionamento da bomba.
+
+</p>
+
+<hr>
+
+<h3>
+
+Constantes (const)
+
+</h3>
+
+<pre><code class="language-cpp">
+
+const int LIMIAR_LIGAR = 30;
+
+const int LIMIAR_DESLIGAR = 15;
+
+</code></pre>
+
+<p>
+
+A palavra <b>const</b> significa que o valor não pode ser alterado durante a execução.
+
+</p>
+
+<p>
+
+Esses valores representam os níveis da água:
+
+</p>
+
+<ul>
+
+<li>30 cm → liga a bomba</li>
+
+<li>15 cm → desliga a bomba</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Por que usar constantes?
+
+</h3>
+
+<p>
+
+Sem const:
+
+</p>
+
+<pre><code class="language-cpp">
+
+int LIMIAR_LIGAR = 30;
+
+</code></pre>
+
+<p>
+
+Com const:
+
+</p>
+
+<pre><code class="language-cpp">
+
+const int LIMIAR_LIGAR = 30;
+
+</code></pre>
+
+<p>
+
+A diferença é simples:
+
+</p>
+
+<ul>
+
+<li>Com const → ninguém pode mudar o valor por engano.</li>
+
+<li>Sem const → o valor pode ser alterado durante o programa.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Tempo máximo de funcionamento
+
+</h3>
+
+<pre><code class="language-cpp">
+
+const unsigned long TEMPO_MAX_LIGADA = 10UL * 60UL * 1000UL;
+
+</code></pre>
+
+<p>
+
+Essa linha define o tempo máximo que a bomba pode ficar ligada:
+10 minutos.
+
+</p>
+
+<hr>
+
+<h3>
+
+Entendendo a conta
+
+</h3>
+
+<pre>
+
+10 minutos
+
+↓
+
+10 × 60 segundos
+
+↓
+
+600 segundos
+
+↓
+
+600 × 1000 ms
+
+↓
+
+600000 ms
+
+</pre>
+
+<p>
+
+O resultado final é 600.000 milissegundos.
+
+</p>
+
+<hr>
+
+<h3>
+
+Por que UL?
+
+</h3>
+
+<p>
+
+O sufixo <b>UL</b> significa:
+
+</p>
+
+<ul>
+
+<li>U → unsigned (sem sinal)</li>
+
+<li>L → long</li>
+
+</ul>
+
+<p>
+
+Isso garante que o número seja armazenado corretamente
+sem risco de overflow.
+
+</p>
+
+<hr>
+
+<h3>
+
+unsigned long inicioBomba
+
+</h3>
+
+<pre><code class="language-cpp">
+
+unsigned long inicioBomba = 0;
+
+</code></pre>
+
+<p>
+
+Essa variável guarda o momento exato em que a bomba foi ligada.
+
+</p>
+
+<p>
+
+Ela será comparada com a função millis() para medir o tempo de funcionamento.
+
+</p>
+
+<hr>
+
+<h3>
+
+Como a memória funciona aqui?
+
+</h3>
+
+<pre>
+
+Arduino liga
+
+↓
+
+Variáveis são criadas
+
+↓
+
+bombaLigada = false
+
+falhaSeguranca = false
+
+inicioBomba = 0
+
+↓
+
+Programa começa a rodar
+
+</pre>
+
+<hr>
+
+<h3>
+
+Analogia simples
+
+</h3>
+
+<pre>
+
+Variável = caixa
+
+Nome = etiqueta da caixa
+
+Valor = conteúdo da caixa
+
+</pre>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>Variáveis armazenam informações temporárias.</li>
+
+<li>bool representa verdadeiro ou falso.</li>
+
+<li>const impede alteração de valores.</li>
+
+<li>unsigned long armazena grandes números positivos.</li>
+
+<li>UL garante precisão no tempo em milissegundos.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>O que é uma variável?</li>
+
+<li>Qual a diferença entre true e false?</li>
+
+<li>Para que serve const?</li>
+
+<li>Por que usamos unsigned long para tempo?</li>
+
+<li>O que significa UL na constante de tempo?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 7 -->
+<!-- ===================================================== -->
+
+<section id="cap7">
+
+<div class="card shadow">
+
+<div class="card-header bg-secondary text-white">
+
+<h1>
+
+Capítulo 7
+
+</h1>
+
+<h2>
+
+O Tempo no Arduino e a Função millis()
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Agora chegamos a um dos conceitos mais importantes do projeto:
+o controle de tempo sem travar o sistema.
+
+</p>
+
+<hr>
+
+<h3>
+
+O problema do delay()
+
+</h3>
+
+<p>
+
+Em muitos programas iniciantes, usa-se a função delay() para esperar.
+
+</p>
+
+<pre><code class="language-cpp">
+
+delay(2000);
+
+</code></pre>
+
+<p>
+
+O problema é que o Arduino fica parado durante esse tempo.
+
+</p>
+
+<pre>
+
+Programa executando
+
+↓
+
+delay(2000)
+
+↓
+
+Arduino fica “congelado”
+
+↓
+
+Nada mais acontece
+
+</pre>
+
+<p>
+
+Isso é ruim para sistemas de controle como o nosso,
+pois precisamos monitorar o sensor continuamente.
+
+</p>
+
+<hr>
+
+<h3>
+
+A solução: millis()
+
+</h3>
+
+<p>
+
+A função millis() retorna o tempo em milissegundos desde que o Arduino foi ligado.
+
+</p>
+
+<pre><code class="language-cpp">
+
+millis()
+
+</code></pre>
+
+<p>
+
+Ela funciona como um relógio interno que nunca para.
+
+</p>
+
+<hr>
+
+<h3>
+
+Exemplo de tempo
+
+</h3>
+
+<pre>
+
+Arduino ligado
+
+↓
+
+0 ms
+
+↓
+
+1 segundo → 1000 ms
+
+↓
+
+2 segundos → 2000 ms
+
+↓
+
+1 minuto → 60000 ms
+
+</pre>
+
+<hr>
+
+<h3>
+
+Como usamos isso no projeto
+
+</h3>
+
+<pre><code class="language-cpp">
+
+inicioBomba = millis();
+
+</code></pre>
+
+<p>
+
+Essa linha grava o momento exato em que a bomba foi ligada.
+
+</p>
+
+<hr>
+
+<h3>
+
+Depois comparamos o tempo
+
+</h3>
+
+<pre><code class="language-cpp">
+
+millis() - inicioBomba
+
+</code></pre>
+
+<p>
+
+Essa conta mostra quanto tempo a bomba está ligada.
+
+</p>
+
+<hr>
+
+<h3>
+
+Exemplo prático
+
+</h3>
+
+<pre>
+
+inicioBomba = 100000 ms
+
+millis() atual = 160000 ms
+
+</pre>
+
+<p>
+
+Então:
+
+</p>
+
+<pre>
+
+160000 - 100000 = 60000 ms
+
+</pre>
+
+<p>
+
+Resultado: 60 segundos (1 minuto)
+
+</p>
+
+<hr>
+
+<h3>
+
+Controle de segurança do projeto
+
+</h3>
+
+<pre><code class="language-cpp">
+
+if (millis() - inicioBomba >= TEMPO_MAX_LIGADA)
+
+</code></pre>
+
+<p>
+
+Essa linha verifica se a bomba já ficou ligada tempo demais.
+
+</p>
+
+<hr>
+
+<h3>
+
+Fluxo da verificação
+
+</h3>
+
+<pre>
+
+Bomba liga
+
+↓
+
+Grava tempo inicial
+
+↓
+
+loop continua rodando
+
+↓
+
+Verifica tempo atual
+
+↓
+
+Subtrai tempos
+
+↓
+
+Compara com limite
+
+↓
+
+Se passou do limite → desliga bomba
+
+</pre>
+
+<hr>
+
+<h3>
+
+Por que isso é melhor que delay()?
+
+</h3>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>delay()</th>
+
+<th>millis()</th>
+
+</tr>
+
+<tr>
+
+<td>Bloqueia o programa</td>
+
+<td>Não bloqueia</td>
+
+</tr>
+
+<tr>
+
+<td>Interrompe leitura do sensor</td>
+
+<td>Permite leitura contínua</td>
+
+</tr>
+
+<tr>
+
+<td>Ruim para automação</td>
+
+<td>Ideal para automação</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>
+
+Exemplo real no nosso sistema
+
+</h3>
+
+<pre>
+
+loop()
+
+↓
+
+Lê sensor
+
+↓
+
+Verifica nível da água
+
+↓
+
+Liga/desliga bomba
+
+↓
+
+Verifica tempo com millis()
+
+↓
+
+Nunca para de rodar
+
+</pre>
+
+<hr>
+
+<h3>
+
+Relógio invisível do Arduino
+
+</h3>
+
+<p>
+
+O millis() funciona como um relógio interno que:
+
+</p>
+
+<ul>
+
+<li>Começa em 0 quando o Arduino liga</li>
+
+<li>Cresce continuamente</li>
+
+<li>Nunca pausa</li>
+
+<li>Não depende de delay()</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Limitação importante
+
+</h3>
+
+<div class="alert alert-warning">
+
+O millis() eventualmente “reinicia” após aproximadamente 50 dias de funcionamento contínuo.
+
+Mas para projetos comuns isso não é um problema.
+
+</div>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>delay() bloqueia o programa.</li>
+
+<li>millis() permite controle sem travar o sistema.</li>
+
+<li>Usamos millis() para medir tempo da bomba ligada.</li>
+
+<li>Subtraímos tempos para calcular duração.</li>
+
+<li>Isso permite segurança no sistema.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>Por que não devemos usar delay() em sistemas de controle?</li>
+
+<li>O que a função millis() retorna?</li>
+
+<li>Como calculamos o tempo que a bomba ficou ligada?</li>
+
+<li>O que acontece quando subtraímos millis() - inicioBomba?</li>
+
+<li>Qual a vantagem do millis() sobre delay()?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 8 -->
+<!-- ===================================================== -->
+
+<section id="cap8">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+<h1>
+
+Capítulo 8
+
+</h1>
+
+<h2>
+
+Leitura do Sensor e Controle da Bomba
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Agora vamos entrar na parte mais importante do sistema:
+a decisão automática de ligar e desligar a bomba.
+
+</p>
+
+<hr>
+
+<h3>
+
+Leitura da distância
+
+</h3>
+
+<pre><code class="language-cpp">
+
+long cm = sensor.read(CM);
+
+</code></pre>
+
+<p>
+
+Essa linha faz o Arduino perguntar ao sensor:
+“qual é a distância atual da água?”
+
+</p>
+
+<p>
+
+O resultado é armazenado na variável <b>cm</b>.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que significa cm?
+
+</h3>
+
+<p>
+
+cm representa centímetros.
+
+É a unidade usada para medir a distância entre o sensor e a água.
+
+</p>
+
+<hr>
+
+<h3>
+
+Como o sensor funciona?
+
+</h3>
+
+<pre>
+
+Sensor envia som
+
+↓
+
+O som bate na água
+
+↓
+
+O som volta
+
+↓
+
+Sensor mede o tempo
+
+↓
+
+Converte em distância
+
+</pre>
+
+<hr>
+
+<h3>
+
+Faixa válida de leitura
+
+</h3>
+
+<p>
+
+O sistema só aceita valores entre:
+
+</p>
+
+<pre>
+
+0 cm → inválido
+
+400 cm → máximo confiável
+
+</pre>
+
+<p>
+
+Por isso usamos a verificação:
+
+</p>
+
+<pre><code class="language-cpp">
+
+if (cm > 0 && cm < 400)
+
+</code></pre>
+
+<hr>
+
+<h3>
+
+O papel da histerese
+
+</h3>
+
+<p>
+
+Nosso sistema usa dois limites diferentes:
+
+</p>
+
+<ul>
+
+<li>30 cm → liga a bomba</li>
+
+<li>15 cm → desliga a bomba</li>
+
+</ul>
+
+<p>
+
+Isso evita que a bomba fique ligando e desligando rapidamente.
+
+</p>
+
+<hr>
+
+<h3>
+
+Por que isso é necessário?
+
+</h3>
+
+<p>
+
+Sem histerese o sistema ficaria instável.
+
+</p>
+
+<pre>
+
+Exemplo sem histerese:
+
+30 cm → liga
+
+29 cm → desliga
+
+30 cm → liga
+
+29 cm → desliga
+
+</pre>
+
+<p>
+
+Isso faria a bomba ficar “clicando” sem parar.
+
+</p>
+
+<hr>
+
+<h3>
+
+Primeira condição de controle
+
+</h3>
+
+<pre><code class="language-cpp">
+
+if (!bombaLigada && cm >= LIMIAR_LIGAR)
+
+</code></pre>
+
+<p>
+
+Essa condição significa:
+
+</p>
+
+<ul>
+
+<li>A bomba está desligada</li>
+
+<li>E a água está baixa (>= 30 cm)</li>
+
+</ul>
+
+<p>
+
+Se isso for verdadeiro, a bomba é ligada.
+
+</p>
+
+<hr>
+
+<h3>
+
+Ligando a bomba
+
+</h3>
+
+<pre><code class="language-cpp">
+
+bombaLigada = true;
+
+inicioBomba = millis();
+
+digitalWrite(RELAY_PIN, LOW);
+
+</code></pre>
+
+<p>
+
+Aqui acontecem três ações importantes:
+
+</p>
+
+<ul>
+
+<li>Marca que a bomba está ligada</li>
+
+<li>Guarda o tempo de início</li>
+
+<li>Ativa o relé (liga a bomba)</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Segunda condição: desligar a bomba
+
+</h3>
+
+<pre><code class="language-cpp">
+
+else if (bombaLigada && cm <= LIMIAR_DESLIGAR)
+
+</code></pre>
+
+<p>
+
+Essa condição verifica:
+
+</p>
+
+<ul>
+
+<li>A bomba está ligada</li>
+
+<li>E a água já chegou no nível desejado</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Desligando a bomba
+
+</h3>
+
+<pre><code class="language-cpp">
+
+bombaLigada = false;
+
+digitalWrite(RELAY_PIN, HIGH);
+
+</code></pre>
+
+<p>
+
+A bomba é desligada e o relé é desativado.
+
+</p>
+
+<hr>
+
+<h3>
+
+Resumo da lógica
+
+</h3>
+
+<pre>
+
+Se bomba desligada e água baixa → LIGA
+
+Se bomba ligada e água cheia → DESLIGA
+
+</pre>
+
+<hr>
+
+<h3>
+
+Fluxo completo
+
+</h3>
+
+<pre>
+
+Ler sensor
+
+↓
+
+Valor válido?
+
+↓
+
+Sim
+
+↓
+
+Água está baixa?
+
+↓
+
+Sim → Liga bomba
+
+↓
+
+Água encheu?
+
+↓
+
+Sim → Desliga bomba
+
+</pre>
+
+<hr>
+
+<h3>
+
+Estabilidade do sistema
+
+</h3>
+
+<p>
+
+Esse sistema evita desperdício de energia e garante funcionamento automático seguro.
+
+</p>
+
+<hr>
+
+<div class="alert alert-success">
+
+<b>Importante</b>
+
+<br><br>
+
+O Arduino não “decide” sozinho.
+
+Ele apenas segue regras matemáticas definidas no código.
+
+</div>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>O sensor mede distância em cm.</li>
+
+<li>O sistema usa dois limites (30 e 15 cm).</li>
+
+<li>Isso evita liga/desliga constante.</li>
+
+<li>A bomba é controlada por condições lógicas.</li>
+
+<li>O relé atua como interruptor elétrico.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>O que significa cm no código?</li>
+
+<li>Por que usamos dois limites diferentes?</li>
+
+<li>O que acontece quando cm >= 30?</li>
+
+<li>O que acontece quando cm <= 15?</li>
+
+<li>Qual a função do relé no sistema?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 9 -->
+<!-- ===================================================== -->
+
+<section id="cap9">
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+<h1>
+
+Capítulo 9
+
+</h1>
+
+<h2>
+
+Sistema de Segurança e Proteção da Bomba
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Agora vamos estudar uma das partes mais importantes do projeto:
+o sistema de segurança.
+
+</p>
+
+<p>
+
+Ele garante que a bomba não fique ligada indefinidamente em caso de erro.
+
+</p>
+
+<hr>
+
+<h3>
+
+O problema que queremos evitar
+
+</h3>
+
+<pre>
+
+Sensor falha
+
+↓
+
+Arduino não recebe leitura correta
+
+↓
+
+Bomba continua ligada
+
+↓
+
+Risco de queimar a bomba
+
+</pre>
+
+<p>
+
+Para evitar isso, criamos um sistema de proteção automática.
+
+</p>
+
+<hr>
+
+<h3>
+
+Tempo máximo de funcionamento
+
+</h3>
+
+<pre><code class="language-cpp">
+
+const unsigned long TEMPO_MAX_LIGADA = 10UL * 60UL * 1000UL;
+
+</code></pre>
+
+<p>
+
+Esse valor define que a bomba só pode ficar ligada por no máximo 10 minutos.
+
+</p>
+
+<hr>
+
+<h3>
+
+Verificação de tempo
+
+</h3>
+
+<pre><code class="language-cpp">
+
+if (bombaLigada && (millis() - inicioBomba >= TEMPO_MAX_LIGADA))
+
+</code></pre>
+
+<p>
+
+Essa linha verifica se a bomba ultrapassou o tempo permitido.
+
+</p>
+
+<hr>
+
+<h3>
+
+Como isso funciona?
+
+</h3>
+
+<pre>
+
+Bomba liga
+
+↓
+
+Guarda tempo inicial (millis)
+
+↓
+
+loop continua rodando
+
+↓
+
+Verifica tempo atual
+
+↓
+
+Subtrai tempos
+
+↓
+
+Compara com limite
+
+</pre>
+
+<hr>
+
+<h3>
+
+O que acontece se ultrapassar o limite?
+
+</h3>
+
+<pre><code class="language-cpp">
+
+bombaLigada = false;
+falhaSeguranca = true;
+digitalWrite(RELAY_PIN, HIGH);
+
+</code></pre>
+
+<p>
+
+Três ações importantes acontecem:
+
+</p>
+
+<ul>
+
+<li>A bomba é desligada</li>
+
+<li>O sistema entra em modo de falha</li>
+
+<li>O relé é desativado</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+O que é falhaSeguranca?
+
+</h3>
+
+<pre><code class="language-cpp">
+
+bool falhaSeguranca = false;
+
+</code></pre>
+
+<p>
+
+Essa variável indica se o sistema entrou em modo de proteção.
+
+</p>
+
+<p>
+
+Quando ela vira <b>true</b>, o sistema bloqueia novas ativações da bomba.
+
+</p>
+
+<hr>
+
+<h3>
+
+Bloqueio do sistema
+
+</h3>
+
+<p>
+
+No início do loop temos a condição:
+
+</p>
+
+<pre><code class="language-cpp">
+
+if (cm > 0 && cm < 400 && !falhaSeguranca)
+
+</code></pre>
+
+<p>
+
+Isso significa que:
+
+</p>
+
+<ul>
+
+<li>Se houver falha de segurança</li>
+
+<li>O sistema não executa o controle normal</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Tradução prática
+
+</h3>
+
+<pre>
+
+falhaSeguranca = true
+
+↓
+
+Sistema entra em proteção
+
+↓
+
+Ignora sensores
+
+↓
+
+Não liga a bomba
+
+</pre>
+
+<hr>
+
+<h3>
+
+Cenários de falha
+
+</h3>
+
+<p>
+
+O sistema pode entrar em falha em situações como:
+
+</p>
+
+<ul>
+
+<li>Bomba ligada por tempo excessivo</li>
+
+<li>Erro contínuo de leitura do sensor</li>
+
+<li>Comportamento inesperado do sistema</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Fluxo de segurança
+
+</h3>
+
+<pre>
+
+Bomba ligada
+
+↓
+
+Tempo começa a contar
+
+↓
+
+Passou de 10 minutos?
+
+↓
+
+Sim
+
+↓
+
+Desliga bomba
+
+↓
+
+Ativa falhaSeguranca
+
+↓
+
+Sistema bloqueado
+
+</pre>
+
+<hr>
+
+<h3>
+
+Como sair da falha?
+
+</h3>
+
+<p>
+
+No código atual, o sistema permanece em falha até reiniciar o Arduino.
+
+</p>
+
+<p>
+
+Isso é intencional para evitar reativação automática de um sistema possivelmente defeituoso.
+
+</p>
+
+<hr>
+
+<h3>
+
+Por que isso é importante?
+
+</h3>
+
+<p>
+
+Sem esse sistema, qualquer erro poderia causar:
+
+</p>
+
+<ul>
+
+<li>Queima da bomba</li>
+
+<li>Desperdício de energia</li>
+
+<li>Falha hidráulica</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>Existe um tempo máximo de funcionamento da bomba.</li>
+
+<li>O sistema usa millis() para controle de tempo.</li>
+
+<li>Se ultrapassar o limite, entra em falha.</li>
+
+<li>falhaSeguranca bloqueia o sistema.</li>
+
+<li>O sistema fica protegido contra erros críticos.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>Qual é o tempo máximo que a bomba pode ficar ligada?</li>
+
+<li>O que acontece quando o tempo é ultrapassado?</li>
+
+<li>Para que serve a variável falhaSeguranca?</li>
+
+<li>O sistema pode religar automaticamente após falha?</li>
+
+<li>Por que esse sistema é importante?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 10 -->
+<!-- ===================================================== -->
+
+<section id="cap10">
+
+<div class="card shadow">
+
+<div class="card-header bg-success text-white">
+
+<h1>
+
+Capítulo 10
+
+</h1>
+
+<h2>
+
+Comunicação Serial e Envio de Dados (JSON)
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Agora vamos entender como o Arduino envia informações para o computador.
+
+Isso é feito através da comunicação Serial.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que é Serial?
+
+</h3>
+
+<p>
+
+Serial é um canal de comunicação entre o Arduino e o computador via USB.
+
+</p>
+
+<pre>
+
+Arduino ───── USB ───── Computador
+
+</pre>
+
+<p>
+
+Tudo que o Arduino escreve na Serial aparece no Monitor Serial da IDE.
+
+</p>
+
+<hr>
+
+<h3>
+
+Iniciando a comunicação
+
+</h3>
+
+<pre><code class="language-cpp">
+
+Serial.begin(9600);
+
+</code></pre>
+
+<p>
+
+Essa linha configura a velocidade da comunicação.
+
+</p>
+
+<ul>
+
+<li>9600 → velocidade padrão em bits por segundo</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Serial.print vs Serial.println
+
+</h3>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Serial.print()</th>
+
+<th>Serial.println()</th>
+
+</tr>
+
+<tr>
+
+<td>Escreve na mesma linha</td>
+
+<td>Escreve e pula linha</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>
+
+Construindo uma mensagem JSON
+
+</h3>
+
+<p>
+
+O Arduino envia dados organizados no formato JSON.
+
+</p>
+
+<pre>
+
+{
+  "distancia": 18,
+  "status": "ok",
+  "bomba": "ligada",
+  "falha": false
+}
+
+</pre>
+
+<hr>
+
+<h3>
+
+Primeira parte da mensagem
+
+</h3>
+
+<pre><code class="language-cpp">
+
+Serial.print("{\"distancia\": ");
+
+Serial.print(cm);
+
+</code></pre>
+
+<p>
+
+Aqui começamos a montar o JSON manualmente.
+
+</p>
+
+<hr>
+
+<h3>
+
+Adicionando status e bomba
+
+</h3>
+
+<pre><code class="language-cpp">
+
+Serial.print(", \"status\": \"ok\", \"bomba\": \"");
+
+Serial.print(bombaLigada ? "ligada" : "desligada");
+
+</code></pre>
+
+<p>
+
+Aqui usamos o operador ternário:
+
+</p>
+
+<pre>
+
+condição ? valor1 : valor2
+
+</pre>
+
+<p>
+
+Ele escolhe entre “ligada” ou “desligada”.
+
+</p>
+
+<hr>
+
+<h3>
+
+O que é operador ternário?
+
+</h3>
+
+<pre>
+
+bombaLigada ? "ligada" : "desligada"
+
+</pre>
+
+<p>
+
+Se bombaLigada for true → “ligada”
+
+Se for false → “desligada”
+
+</p>
+
+<hr>
+
+<h3>
+
+Adicionando falha
+
+</h3>
+
+<pre><code class="language-cpp">
+
+Serial.print("\", \"falha\": ");
+
+Serial.print(falhaSeguranca ? "true" : "false");
+
+</code></pre>
+
+<p>
+
+Aqui mostramos se o sistema entrou em modo de proteção.
+
+</p>
+
+<hr>
+
+<h3>
+
+Finalizando a mensagem
+
+</h3>
+
+<pre><code class="language-cpp">
+
+Serial.println("}");
+
+</code></pre>
+
+<p>
+
+Fecha o JSON e pula para a próxima linha.
+
+</p>
+
+<hr>
+
+<h3>
+
+Quando ocorre erro de leitura
+
+</h3>
+
+<pre><code class="language-cpp">
+
+else {
+
+  Serial.println("{\"distancia\":0,\"status\":\"erro_leitura\",\"bomba\":\"desligada\"}");
+
+}
+
+</code></pre>
+
+<p>
+
+Se o sensor falhar, o Arduino envia uma mensagem de erro.
+
+</p>
+
+<hr>
+
+<h3>
+
+Fluxo da comunicação
+
+</h3>
+
+<pre>
+
+Ler sensor
+
+↓
+
+Montar JSON
+
+↓
+
+Enviar Serial
+
+↓
+
+Monitor Serial exibe dados
+
+</pre>
+
+<hr>
+
+<h3>
+
+Por que usar JSON?
+
+</h3>
+
+<ul>
+
+<li>Estrutura organizada</li>
+
+<li>Fácil de ler por humanos</li>
+
+<li>Fácil de interpretar por sistemas</li>
+
+<li>Compatível com aplicações web e mobile</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exemplo de saída real
+
+</h3>
+
+<pre>
+
+{"distancia":20,"status":"ok","bomba":"ligada","falha":false}
+
+</pre>
+
+<hr>
+
+<h3>
+
+Resumo do capítulo
+
+</h3>
+
+<ul>
+
+<li>Serial envia dados para o computador.</li>
+
+<li>Serial.begin define a velocidade da comunicação.</li>
+
+<li>Serial.print monta a mensagem.</li>
+
+<li>Serial.println finaliza a linha.</li>
+
+<li>Usamos JSON para estruturar os dados.</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Exercícios
+
+</h3>
+
+<ol>
+
+<li>O que é comunicação Serial?</li>
+
+<li>Qual a diferença entre print e println?</li>
+
+<li>O que é JSON?</li>
+
+<li>O que faz o operador ternário?</li>
+
+<li>Por que usamos Serial no projeto?</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CAPÍTULO 11 -->
+<!-- ===================================================== -->
+
+<section id="cap11">
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+<h1>
+
+Capítulo 11
+
+</h1>
+
+<h2>
+
+O Loop Completo e o Sistema Integrado
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+Agora vamos juntar todas as partes do programa e entender o sistema funcionando como um todo.
+
+</p>
+
+<hr>
+
+<h3>
+
+Estrutura geral do loop()
+
+</h3>
+
+<pre><code class="language-cpp">
+
+void loop() {
+
+  long cm = sensor.read(CM);
+
+  if (cm > 0 && cm < 400 && !falhaSeguranca) {
+
+    // controle da bomba
+
+    // lógica de segurança
+
+    // atualização de estados
+
+    // envio Serial
+
+  } else {
+
+    // erro de leitura
+
+  }
+
+  delay(2000);
+
+}
+
+</code></pre>
+
+<hr>
+
+<h3>
+
+Fluxo completo do sistema
+
+</h3>
+
+<pre>
+
+LOOP INICIA
+
+↓
+
+Lê sensor (cm)
+
+↓
+
+Valor válido?
+
+↓
+
+Não → envia erro
+
+↓
+
+Sim →
+
+↓
+
+Sistema não está em falha?
+
+↓
+
+Sim →
+
+↓
+
+Verifica nível da água
+
+↓
+
+Liga ou desliga bomba
+
+↓
+
+Verifica tempo de segurança
+
+↓
+
+Envia dados via Serial
+
+↓
+
+Aguarda 2 segundos
+
+↓
+
+Repete tudo
+
+</pre>
+
+<hr>
+
+<h3>
+
+Ordem real de execução
+
+</h3>
+
+<p>
+
+O Arduino executa esse processo milhares de vezes por segundo:
+
+</p>
+
+<ol>
+
+<li>Lê o sensor</li>
+
+<li>Verifica se leitura é válida</li>
+
+<li>Decide estado da bomba</li>
+
+<li>Verifica segurança</li>
+
+<li>Envia dados</li>
+
+<li>Repete</li>
+
+</ol>
+
+<hr>
+
+<h3>
+
+Integração de tudo
+
+</h3>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Parte do código</th>
+
+<th>Função no sistema</th>
+
+</tr>
+
+<tr>
+
+<td>sensor.read(CM)</td>
+
+<td>Mede nível da água</td>
+
+</tr>
+
+<tr>
+
+<td>#define</td>
+
+<td>Define pinos</td>
+
+</tr>
+
+<tr>
+
+<td>millis()</td>
+
+<td>Controle de tempo</td>
+
+</tr>
+
+<tr>
+
+<td>if/else</td>
+
+<td>Tomada de decisão</td>
+
+</tr>
+
+<tr>
+
+<td>Serial</td>
+
+<td>Envio de dados</td>
+
+</tr>
+
+<tr>
+
+<td>RELAY</td>
+
+<td>Controla bomba</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>
+
+O cérebro do sistema
+
+</h3>
+
+<p>
+
+O Arduino não faz nada sozinho.
+
+Ele apenas executa regras.
+
+</p>
+
+<pre>
+
+Entrada → Sensor
+
+↓
+
+Processamento → Código
+
+↓
+
+Saída → Relé (bomba)
+
+</pre>
+
+<hr>
+
+<h3>
+
+Ciclo contínuo
+
+</h3>
+
+<pre>
+
+Sensor
+
+↓
+
+Arduino processa
+
+↓
+
+Decisão
+
+↓
+
+Ação
+
+↓
+
+Recomeça
+
+</pre>
+
+<hr>
+
+<h3>
+
+O sistema em funcionamento real
+
+</h3>
+
+<pre>
+
+Água baixa
+
+↓
+
+Sensor detecta 30 cm
+
+↓
+
+Bomba liga
+
+↓
+
+Água sobe
+
+↓
+
+Chega a 15 cm
+
+↓
+
+Bomba desliga
+
+↓
+
+Sistema entra em espera
+
+↓
+
+Repete monitoramento
+
+</pre>
+
+<hr>
+
+<h3>
+
+Comportamento inteligente
+
+</h3>
+
+<p>
+
+O sistema não precisa de intervenção humana.
+
+Ele reage automaticamente às condições da caixa d’água.
+
+</p>
+
+<hr>
+
+<h3>
+
+Proteções do sistema
+
+</h3>
+
+<ul>
+
+<li>Verificação de leitura válida</li>
+
+<li>Controle de tempo com millis()</li>
+
+<li>Proteção contra falhaSeguranca</li>
+
+<li>Desligamento automático</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+O que acontece se algo der errado?
+
+</h3>
+
+<pre>
+
+Sensor falha
+
+↓
+
+Sistema detecta erro
+
+↓
+
+Envia status de erro
+
+↓
+
+Não liga bomba
+
+</pre>
+
+<hr>
+
+<h3>
+
+Resumo final do sistema
+
+</h3>
+
+<ul>
+
+<li>O Arduino lê sensores continuamente</li>
+
+<li>Decide automaticamente ligar ou desligar a bomba</li>
+
+<li>Controla o tempo de funcionamento</li>
+
+<li>Envia dados via Serial</li>
+
+<li>Se protege contra falhas</li>
+
+</ul>
+
+<hr>
+
+<h3>
+
+Conclusão do livro
+
+</h3>
+
+<div class="alert alert-success">
+
+Este projeto demonstra um sistema completo de automação com Arduino,
+integrando sensores, atuadores, lógica de controle e segurança.
+
+</div>
+
+<hr>
+
+<h3>
+
+Mensagem final
+
+</h3>
+
+<div class="alert alert-info">
+
+A automação não é apenas programação.
+
+É a capacidade de transformar lógica em ação no mundo real.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+</body>
+</html>
